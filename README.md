@@ -27,6 +27,8 @@ cd seu-repositorio
 npm install
 npm install vite
 npm install tailwindcss
+npm install react-router-dom
+npm install localforage match-sorter sort-by
 ```
 
 ### 3. Abrir o Projeto no Editor de Código
