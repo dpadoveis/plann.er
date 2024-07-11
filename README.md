@@ -29,12 +29,12 @@ npm install vite
 npm install tailwindcss
 ```
 
-###3. Abrir o Projeto no Editor de Código
+### 3. Abrir o Projeto no Editor de Código
 No terminal, execute:
 ```sh
 code .
 ```
-###4. Rodar o Projeto Localmente
+### 4. Rodar o Projeto Localmente
 Para rodar o projeto localmente, utilize o seguinte comando no terminal:
 ```sh
 npm run dev
