@@ -2,34 +2,38 @@ import { MapPin, Calendar, Settings2, ArrowRight, X } from "lucide-react";
 import { Button } from "../../../components/button";
 import { useState } from "react";
 import { DateRange, DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css"
-import { format } from 'date-fns'
+import 'react-day-picker/dist/style.css'
+import { format } from "date-fns";
 
 interface DestinationAndDateStepProps {
   isGuestsInputOpen: boolean;
+  eventStartAndEndDates: DateRange | undefined;
   closeGuestsInput: () => void;
   openGuestsInput: () => void;
+  setDestination: (destination: string) => void;
+  setEventStartAndEndDates: (dates: DateRange | undefined) => void;
 }
 
 export function DestinationAndDateStep({
   closeGuestsInput,
   isGuestsInputOpen,
-  openGuestsInput
+  openGuestsInput,
+  setDestination,
+  setEventStartAndEndDates,
+  eventStartAndEndDates
 }: DestinationAndDateStepProps) {
-  const [isDatePickerOpen, setisDatePickerOpen] = useState(false)
-  const [eventStartAndEndDates, seteventStartAndEndDates] = useState<DateRange | undefined>()
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
 
   function openDatePicker() {
-    return setisDatePickerOpen(true)
+    setIsDatePickerOpen(true);
   }
+
   function closeDatePicker() {
-    return setisDatePickerOpen(false)
+    setIsDatePickerOpen(false);
   }
 
   const displayedDate = eventStartAndEndDates && eventStartAndEndDates.from && eventStartAndEndDates.to
-    ? format(eventStartAndEndDates.from, "d' de 'LLL")
-      .concat(' até ')
-      .concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
+    ? format(eventStartAndEndDates.from, "d' de 'LLL").concat(' até ').concat(format(eventStartAndEndDates.to, "d' de 'LLL"))
     : null
 
   return (
@@ -41,15 +45,19 @@ export function DestinationAndDateStep({
           type="text"
           placeholder="Para onde você vai?"
           className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
+          onChange={event => setDestination(event.target.value)}
         />
       </div>
 
-      <button onClick={openDatePicker} disabled={isGuestsInputOpen} className="flex items-center gap-2 text-left w-[240px]">
+      <button disabled={isGuestsInputOpen} onClick={openDatePicker} className="flex items-center gap-2 text-left w-[240px]">
         <Calendar className="size-5 text-zinc-400" />
-        <span className="text-lg text-zinc-400 w-40 flex-1">
-          {displayedDate || 'Quando?'}
+        <span
+          className="text-lg text-zinc-400 w-40 flex-1"
+        >
+          {displayedDate || 'Quando'}
         </span>
       </button>
+
       {isDatePickerOpen && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
           <div className="rounded-xl py-5 px-6 shadow-shape bg-zinc-900 space-y-5">
@@ -62,10 +70,9 @@ export function DestinationAndDateStep({
               </div>
             </div>
 
-            <DayPicker mode="range" selected={eventStartAndEndDates} onSelect={seteventStartAndEndDates} />
+            <DayPicker mode="range" selected={eventStartAndEndDates} onSelect={setEventStartAndEndDates} />
           </div>
         </div>
-
       )}
 
       <div className="w-px h-6 bg-zinc-800" />
