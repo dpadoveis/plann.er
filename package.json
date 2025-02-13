@@ -1,17 +1,21 @@
 {
-  "name": "frontend",
+  "name": "plann.er",
+  "homepage": "https://dpadoveis.github.io/plann.er/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
+    "gh-pages": "^6.3.0",
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
